@@ -35,7 +35,7 @@ units = {"KB": 2**10, "MB": 2**20, "GB": 2**30}
 
 
 def parse_mem_string(str):
-    str = re.sub(r"([KMGT]?B)", r" \1", str)
+    str = re.sub(r"([KMG]?B)", r" \1", str)
 
     try:
         number, unit = [string.strip() for string in str.split()]
@@ -88,7 +88,7 @@ if len(args.f) == 0 or len(args.f) > 3:
         "File quantity error: Provide at least one, at most three filename arguments"
     )
 
-if args.s < 0 or args.s > 8192:
+if args.s < 1 or args.s > 8192:
     parser.error("Cache size flag -s must be an integer value from 1 to 8192")
 
 if args.b < 4 or args.b > 64:
