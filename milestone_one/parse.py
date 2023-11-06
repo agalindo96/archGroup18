@@ -2,20 +2,36 @@ import argparse
 import re
 
 """
-    "Note that in my sample simulation, for cache size I only accept numbers,
-    so for 8MB would have to put in “-s 8192”"
-
     We're gonna need to process physical memory size arg as a string since the upper range 
     would be way too long to manually enter (512GB = 536,870,912KB)
 
     To validate we're gonna have to translate the arg to an integer and compare against the lower/upper range
-"""
 
-"""
-    Figure how to structure this. Create executable? Driver script? 
+    Figure how to structure this. Create executable? Driver script?
+
+    TODO: Validate filename args, error and exit if file does not exist
+        Maybe we should do that error check in the next part of the program
+        i.e. this script gives a list of all -f args to the next script, which processes each arg
+             if the file does not exist, print an error message but still process the valid files
+
+    TODO: Make all arguments required, currently filename works any number of args (including 0)
+        argparse help groups?
+        second and third -f args would stay optional
+
+    TODO: If we make an executable, change the program name in the usage statement
+
+
 """
 
 units = {"KB": 2**10, "MB": 2**20, "GB": 2**30}
+
+
+"""
+    Translates physical memory string input into the actual value in KB
+    Used to validate if input is between 64KB and 512GB
+
+    Ex. 8MB -> 8,192(KB)
+"""
 
 
 def parse_mem_string(str):
@@ -23,26 +39,32 @@ def parse_mem_string(str):
 
     try:
         number, unit = [string.strip() for string in str.split()]
-    except:
-        parser.error("Physical memory argument must include units (Ex. 128MB)")
+    except:  # Handles if a number is provided without units
+        parser.error("Physical memory argument must include units {KB, MB, GB}")
 
     return int(float(number) * units[unit] / units["KB"])
 
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-f", action="append")
-cache_size = parser.add_argument(
+parser.add_argument(
+    "-f",
+    action="append",
+    default=[],
+    metavar="filename",
+    help="name of text file with the trace",
+)
+parser.add_argument(
     "-s",
     type=int,
     metavar="[1, 8192]",
-    help="denotes the cache size in KB from 1 KB to 8 MB",
+    help="denotes the cache size in KB from 1KB to 8MB",
 )
-block_size = parser.add_argument(
+parser.add_argument(
     "-b",
     type=int,
     metavar="[4, 64]",
-    help="denotes the block size in B from 4 B to 64 B",
+    help="denotes the block size in B from 4B to 64B",
 )
 parser.add_argument(
     "-a", type=int, choices=[1, 2, 4, 8, 16], help="cache associativity"
@@ -52,12 +74,19 @@ parser.add_argument(
 )
 parser.add_argument(
     "-p",
-    help="denotes the size of physical memory in KB from 64 KB to 512 GB",
+    help="denotes the size of physical memory in KB from 64KB to 512GB",
+    metavar="[64KB, 512GB]",
 )
 
 args = parser.parse_args()
+
 physical_memory = parse_mem_string(args.p)
 upper_range = int(512 * units["GB"] / units["KB"])
+
+if len(args.f) == 0 or len(args.f) > 3:
+    parser.error(
+        "File quantity error: Provide at least one, at most three filename arguments"
+    )
 
 if args.s < 0 or args.s > 8192:
     parser.error("Cache size flag -s must be an integer value from 1 to 8192")
@@ -69,6 +98,5 @@ if physical_memory < 64 or physical_memory > upper_range:
     parser.error(
         "Physical memory flag -p must be a string representing a memory size from 64 KB to 512 GB"
     )
-
 
 print(args)
