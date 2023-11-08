@@ -20,3 +20,9 @@ def print_out(args):
         print(f"Implementation Memory Size:\t###.## #B (###### bytes)")
         print(f"Cost:\t\t\t\t$##.## @ ($0.09 / KB)\n")
 
+
+'''
+TODO: Create output files for 3 different runs of Trace1.trc, follow naming conventions
+      Print first 20 addresses and lengths with formatting
+'''
+
