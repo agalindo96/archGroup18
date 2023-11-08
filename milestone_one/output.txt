@@ -1,24 +1,3 @@
-Cache Simulator CS 3853 Fall 2023 - Group #18
-
-Trace File: trace1.trc
-
-***** Cache Input Parameters *****
-Cache Size:                     512 KB
-Block Size:                     16 bytes
-Associativity:                  2
-Replacement Policy:             Round-Robin
-
-
-***** Cache Calculated Values *****
-
-Total # Blocks:                 #####
-Tag Size:                       ## bits
-Index Size:                     ## bits
-Total # Rows:                   ####
-Overhead Size:                  ##### bytes
-Implementation Memory Size:     ###.## #B (###### bytes)
-Cost:                           $##.## @ ($0.09 / KB)
-
 0x7c81eb33: (1)
 0x7c81eb34: (1)
 0x7c81eb35: (3)
