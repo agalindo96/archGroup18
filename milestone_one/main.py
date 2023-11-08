@@ -1,6 +1,7 @@
 import argparse
 import re
 
+import parse_trace
 import output
 
 """
@@ -12,15 +13,16 @@ import output
     Figure how to structure this. Create executable?
 
     TODO: Validate filename args in the next part of the program
+
+          ************
+          FILE VALIDATION NOT NEEDED FOR M#1 SINCE ALL RUNS WILL BE ON THE SAME FILE!
+          ************
+
         i.e. this script gives a list of all -f args to the next script, which processes each arg
              if the file does not exist, print an error message but still process the valid files
 
         TODO: I think it makes more sense for THIS to be the main file, which then passes the parsed args to
               the next part of the program
-
-    TODO: Make all arguments required, currently filename works any number of args (including 0)
-        argparse help groups?
-        second and third -f args would stay optional
 
     TODO: If we make an executable, change the program name in the usage statement
 
@@ -109,7 +111,14 @@ def parse_mem_string(str, parser):
 
 def main():
     args = parse_arguments()
-    output.print_out(args)
+    args.f = parse_trace.validate(args.f)
+    if len(args.f) >= 1: output.print_out(args)
+'''
+TODO: Create output files for 3 different runs of Trace1.trc, follow naming conventions
+      Print first 20 addresses and lengths with formatting
+
+      We don't need to hardcode the file creation, we can do that from the command line 
+'''
 
 if __name__ == '__main__':
     main()

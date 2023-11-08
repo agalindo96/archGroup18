@@ -6,23 +6,16 @@ def print_out(args):
     for file in args.f:
         print(f"Trace File: {file}\n")
         print("***** Cache Input Parameters *****")
-        print(f"Cache Size:\t\t\t{args.s} KB")
-        print(f"Block Size:\t\t\t{args.b} bytes")
-        print(f"Associativity:\t\t\t{args.a}")
-        print(f"Replacement Policy:\t\t{replacement}\n\n")
+        print(f"{'Cache Size: ':32}{args.s} KB")
+        print(f"{'Block Size: ':32}{args.b} bytes")
+        print(f"{'Associativity: ':32}{args.a}")
+        print(f"{'Replacement Policy: ':32}{replacement}\n\n")
 
         print("***** Cache Calculated Values *****\n")
-        print(f"Total # Blocks:\t\t\t#####")
-        print(f"Tag Size:\t\t\t## bits")
-        print(f"Index Size:\t\t\t## bits")
-        print(f"Total # Rows:\t\t\t####")
-        print(f"Overhead Size:\t\t\t##### bytes")
-        print(f"Implementation Memory Size:\t###.## #B (###### bytes)")
-        print(f"Cost:\t\t\t\t$##.## @ ($0.09 / KB)\n")
-
-
-'''
-TODO: Create output files for 3 different runs of Trace1.trc, follow naming conventions
-      Print first 20 addresses and lengths with formatting
-'''
-
+        print(f"{'Total # Blocks: ':32}#####")
+        print(f"{'Tag Size: ':32}## bits")
+        print(f"{'Index Size: ':32}## bits")
+        print(f"{'Total # Rows: ':32}####")
+        print(f"{'Overhead Size: ':32}##### bytes")
+        print(f"{'Implementation Memory Size: ':32}###.## #B (###### bytes)")
+        print(f"{'Cost: ':32}$##.## @ ($0.09 / KB)\n")
