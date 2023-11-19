@@ -5,28 +5,9 @@ import parse_trace
 import output
 
 """
-    We're gonna need to process physical memory size arg as a string since the upper range 
-    would be way too long to manually enter (512GB = 536,870,912KB)
-
-    To validate we're gonna have to translate the arg to an integer and compare against the lower/upper range
-
     Figure how to structure this. Create executable?
 
-    TODO: Validate filename args in the next part of the program
-
-          ************
-          FILE VALIDATION NOT NEEDED FOR M#1 SINCE ALL RUNS WILL BE ON THE SAME FILE!
-          ************
-
-        i.e. this script gives a list of all -f args to the next script, which processes each arg
-             if the file does not exist, print an error message but still process the valid files
-
-        TODO: I think it makes more sense for THIS to be the main file, which then passes the parsed args to
-              the next part of the program
-
     TODO: If we make an executable, change the program name in the usage statement
-
-
 """
 
 units = {"KB": 2**10, "MB": 2**20, "GB": 2**30}
@@ -112,13 +93,7 @@ def parse_mem_string(str, parser):
 def main():
     args = parse_arguments()
     args.f = parse_trace.validate(args.f)
-    if len(args.f) >= 1: output.print_out(args)
-'''
-TODO: Create output files for 3 different runs of Trace1.trc, follow naming conventions
-      Print first 20 addresses and lengths with formatting
-
-      We don't need to hardcode the file creation, we can do that from the command line 
-'''
+    if len(args.f) >= 1: output.print_results(args)
 
 if __name__ == '__main__':
     main()

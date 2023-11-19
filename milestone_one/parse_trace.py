@@ -1,13 +1,9 @@
 import os
 import re
 
-
-x = ''''''
+x = ''
 list = []
 
-'''
-TODO: Validate filenames
-'''
 def validate(files):
     output = []
     for file in files:
