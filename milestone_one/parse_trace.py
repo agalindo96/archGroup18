@@ -4,7 +4,7 @@ import re
 x = ''
 list = []
 
-def validate(files):
+def validate(files) -> list:
     output = []
     for file in files:
         if not os.path.isfile("./data/" + file):
@@ -15,8 +15,9 @@ def validate(files):
     return output
 
 
-
-def get_addresses():
+# Modify to Return the addresses? Does another function depend on that output?
+# TODO: Definitely need to modify
+def get_addresses() -> None:
     with open('./data/Trace1.trc', 'r') as reader:
         file = reader.readlines()
 
