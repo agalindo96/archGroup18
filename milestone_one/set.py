@@ -7,7 +7,6 @@ class Set:
         Or would we just ignore that in our calculations?
     '''
     def __init__(self, size):
-
         self.valid = 0
         self.tag = 0
         self.data = [0] * size

@@ -129,12 +129,20 @@ def parse_mem_string(str, parser) -> int:
     return int(number) * UNITS[unit]
 
 def main() -> None:
+    # Parse the user input, get a list-like object containing all the arguments
     args = parse_arguments()
 
+    # Call external validation function. Verifies that the files entered exist.
+    # Overwrites the existing field for file arguments with a list of all valid files
     args.f = parse_trace.validate(args.f)
 
-    arg_data = output.process_args(args)
-    output.print_milestone_one(arg_data)
+    # If the user provided at least one valid file name
+    if len(args.f) >= 1:
+        arg_data = output.process_args(args)
+        output.print_milestone_one(arg_data)
+    else: # None of the files were valid
+        print(print(f"Failed to find any existing files."))
+        exit()
 
 if __name__ == '__main__':
     main()
